@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/expuz_black">
+
+    <!--
+      The WebView fills the whole window. The page viewport is inset in code so
+      content starts below the translucent toolbar and ends above the
+      navigation bar / keyboard. The toolbar itself overlays the WebView.
+    -->
+    <FrameLayout
+        android:id="@+id/webContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/expuz_black" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/loadingOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/expuz_black"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingHorizontal="40dp"
+            android:paddingVertical="32dp">
+
+            <ImageView
+                android:layout_width="76dp"
+                android:layout_height="76dp"
+                android:contentDescription="@string/expuz_logo"
+                android:src="@drawable/ic_splash_logo" />
+
+            <TextView
+                android:id="@+id/loadingTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:gravity="center"
+                android:text="@string/loading_connecting"
+                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                android:textColor="@color/expuz_text" />
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/loadingSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:indeterminate="true"
+                app:indicatorColor="@color/expuz_accent"
+                app:indicatorSize="36dp"
+                app:trackColor="@color/expuz_surface_variant"
+                app:trackThickness="3dp" />
+
+            <TextView
+                android:id="@+id/loadingPercent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
+                android:textColor="@color/expuz_text_muted"
+                tools:text="42%" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:gravity="center"
+                android:text="@string/loading_hint"
+                android:textAppearance="@style/TextAppearance.Expuz.BodyMuted" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/errorOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/expuz_black"
+        android:fillViewport="true"
+        android:visibility="gone"
+        tools:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="vertical"
+            android:paddingHorizontal="28dp"
+            android:paddingVertical="32dp">
+
+            <ImageView
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_cloud_off"
+                app:tint="@color/expuz_error" />
+
+            <TextView
+                android:id="@+id/errorTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
+                android:textColor="@color/expuz_text"
+                tools:text="Cannot reach the server" />
+
+            <TextView
+                android:id="@+id/errorMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:lineSpacingExtra="3dp"
+                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                android:textColor="@color/expuz_text_muted"
+                tools:text="The server refused the connection. Check that Open WebUI is running..." />
+
+            <TextView
+                android:id="@+id/errorDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:fontFamily="monospace"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                android:textColor="@color/expuz_text_muted"
+                android:textIsSelectable="true"
+                tools:text="Server: http://192.168.1.10:8080" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/retryButton"
+                style="@style/Widget.Expuz.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:text="@string/retry"
+                app:icon="@drawable/ic_refresh"
+                app:iconGravity="textStart" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/fallbackButton"
+                style="@style/Widget.Expuz.Button.Outlined"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                tools:text="Switch to REMOTE server"
+                tools:visibility="visible" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/errorSettingsButton"
+                style="@style/Widget.Expuz.Button.Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="@string/server_settings" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:gravity="center"
+                android:text="@string/error_footer"
+                android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                android:textColor="@color/expuz_text_muted" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Compact floating glass controls overlaying the WebView. -->
+    <FrameLayout
+        android:id="@+id/toolbarGlass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center_horizontal"
+        android:elevation="12dp"
+        android:background="@drawable/bg_glass_toolbar"
+        android:clipToOutline="true">
+
+        <ImageView
+            android:id="@+id/toolbarBlur"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:alpha="0.92"
+            android:importantForAccessibility="no"
+            android:scaleType="centerCrop" />
+
+        <View
+            android:id="@+id/toolbarTint"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/bg_glass_scrim" />
+
+        <LinearLayout
+            android:id="@+id/toolbarContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="4dp">
+
+            <ImageButton
+                android:id="@+id/refreshButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/refresh"
+                android:padding="12dp"
+                android:src="@drawable/ic_refresh"
+                app:tint="@color/expuz_text" />
+
+            <ImageButton
+                android:id="@+id/settingsButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/settings"
+                android:padding="12dp"
+                android:src="@drawable/ic_settings"
+                app:tint="@color/expuz_text" />
+        </LinearLayout>
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/pageProgress"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_gravity="bottom"
+            android:indeterminate="false"
+            android:max="100"
+            android:visibility="gone"
+            app:indicatorColor="@color/expuz_accent"
+            app:trackColor="@android:color/transparent"
+            app:trackThickness="2dp" />
+
+        <View
+            android:id="@+id/toolbarHairline"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/bg_glass_hairline" />
+    </FrameLayout>
+</FrameLayout>

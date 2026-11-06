@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Expuz AI</string>
+    <string name="app_tagline">Your AI. Your server.</string>
+
+    <!-- Shared actions -->
+    <string name="cancel">Cancel</string>
+    <string name="continue_action">Continue</string>
+    <string name="close">Close</string>
+    <string name="retry">Retry</string>
+    <string name="refresh">Refresh</string>
+    <string name="settings">Settings</string>
+    <string name="server_settings">Server settings</string>
+    <string name="save">Save</string>
+    <string name="open">Open</string>
+    <string name="back">Back</string>
+    <string name="expuz_logo">Expuz AI logo</string>
+
+    <!-- Connection indicator -->
+    <string name="kind_local">LOCAL</string>
+    <string name="kind_remote">REMOTE</string>
+    <string name="kind_unknown">SERVER</string>
+    <string name="status_connected">Connected</string>
+    <string name="status_connecting">Connecting</string>
+    <string name="status_offline">Offline</string>
+    <string name="status_issue">Connection issue</string>
+    <string name="connection_status_format">%1$s · %2$s</string>
+    <string name="no_network_banner">No network connection. Local servers need Wi-Fi.</string>
+
+    <!-- Loading -->
+    <string name="loading_connecting">Connecting to your server</string>
+    <string name="loading_loading">Loading Expuz AI</string>
+    <string name="percent_format">%1$d%%</string>
+    <string name="loading_hint">The chat experience is served by your Open WebUI instance.</string>
+
+    <!-- Errors -->
+    <string name="error_not_found_title">Server not found</string>
+    <string name="error_not_found_message">We could not find this server. Check the address, and make sure your phone is on the same network as the server.</string>
+    <string name="error_refused_title">Cannot reach the server</string>
+    <string name="error_refused_message">The server refused the connection. Check that Open WebUI is running, that it listens on 0.0.0.0, and that your firewall allows the port.</string>
+    <string name="error_timeout_title">Connection timed out</string>
+    <string name="error_timeout_message">The server took too long to respond. Check your Wi-Fi or mobile network, then try again.</string>
+    <string name="error_offline_title">No network connection</string>
+    <string name="error_offline_message">Connect to Wi-Fi or mobile data. For a local server, make sure you are on the same Wi-Fi network as the server.</string>
+    <string name="error_tls_title">Secure connection failed</string>
+    <string name="error_tls_message">The HTTPS certificate could not be verified. Expuz AI never ignores certificate errors. Use a valid certificate, or connect over your trusted LAN during development.</string>
+    <string name="error_http_title">Server error (HTTP %1$d)</string>
+    <string name="error_http_message">The server responded with an error. Try again, or check the Open WebUI logs if it keeps happening.</string>
+    <string name="error_http_generic_title">Server error</string>
+    <string name="error_http_generic_message">The server returned an unexpected response. Try again in a moment.</string>
+    <string name="error_crash_title">The web view stopped</string>
+    <string name="error_crash_message">The Android browser engine crashed or ran out of memory. Reload the page to continue. Your login session is kept.</string>
+    <string name="error_blocked_title">Navigation blocked</string>
+    <string name="error_blocked_message">Expuz AI only loads pages from your configured server. Use the button below to review the server address.</string>
+    <string name="error_cleartext_title">Insecure connection blocked</string>
+    <string name="error_cleartext_message">Use HTTPS for remote servers. Plain HTTP is only available for private LAN addresses in development builds.</string>
+    <string name="error_unknown_title">Could not load Expuz AI</string>
+    <string name="error_unknown_message">Something went wrong while loading the server. Check your connection and try again.</string>
+    <string name="error_footer">Expuz AI never bypasses TLS certificate errors or loads unapproved external pages inside the app.</string>
+    <string name="error_detail">Server: %1$s</string>
+    <string name="error_http_detail">HTTP %1$d · %2$s</string>
+    <string name="error_switch_to">Switch to %1$s server</string>
+
+    <!-- Notifications -->
+    <string name="open_external_title">Open external link?</string>
+    <string name="open_external_message">This link goes to %1$s and will open in your browser. Expuz AI stays in the background.</string>
+    <string name="download_started">Download started. Check your Downloads folder.</string>
+    <string name="download_started_file">Download started: %1$s</string>
+    <string name="download_failed">Could not start the download.</string>
+    <string name="download_unsupported">This file type cannot be downloaded inside the app.</string>
+    <string name="blocked_navigation">Navigation to an unapproved address was blocked.</string>
+    <string name="http_auth_required">This server requested native HTTP authentication, which is not supported. Sign in through the web UI instead.</string>
+    <string name="file_picker_failed">Could not open the Android file picker.</string>
+    <string name="no_external_app">No app can open this link.</string>
+    <string name="frontend_reloaded">Frontend reloaded</string>
+    <string name="cache_cleared_reloading">HTTP cache cleared. Reloading the frontend.</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_eyebrow">SELF-HOSTED AI</string>
+    <string name="onboarding_title">Connect your server</string>
+    <string name="onboarding_subtitle">Expuz AI is a native shell for your own Open WebUI. The chat interface is served by your server, so frontend updates appear without reinstalling the app.</string>
+    <string name="onboarding_card_title">Server address</string>
+    <string name="server_url">Server URL</string>
+    <string name="server_url_helper">LAN: http://192.168.x.x:8080 · Remote: https://ai.example.com</string>
+    <string name="onboarding_localhost_note">On a phone, localhost means the phone itself. Use your PC LAN address, or a public HTTPS domain.</string>
+    <string name="onboarding_test">Test connection</string>
+    <string name="onboarding_save">Save and continue</string>
+    <string name="onboarding_saving">Saving…</string>
+    <string name="onboarding_privacy">Your server address stays on this device. The APK contains no API keys or backend credentials.</string>
+    <string name="onboarding_advanced_note">Later, add separate local and remote addresses in Settings for local-first fallback.</string>
+    <string name="onboarding_unreachable_title">Continue anyway?</string>
+    <string name="onboarding_unreachable_message">Expuz AI could not reach this server. You can still save the address and try again when the server is available.</string>
+    <string name="onboarding_save_anyway">Save anyway</string>
+    <string name="onboarding_tested_ready">Address looks valid. You can connect now.</string>
+
+    <!-- Validation / probe messages -->
+    <string name="url_error_empty">Enter a server address.</string>
+    <string name="url_error_malformed">Enter a valid server address, for example http://192.168.x.x:8080.</string>
+    <string name="url_error_scheme">Only http:// and https:// addresses are supported.</string>
+    <string name="url_error_credentials">Do not include a username or password in the URL.</string>
+    <string name="url_error_query">Remove the query string and fragment from the server URL.</string>
+    <string name="url_error_remote_http">Use HTTPS for remote servers. Plain HTTP is only allowed on a private local network.</string>
+    <string name="url_error_http_disabled">This build does not allow plain HTTP. Use HTTPS, or install the debug build for LAN development.</string>
+    <string name="url_error_host">Enter a valid host name or IP address.</string>
+    <string name="url_error_port">Enter a valid port between 1 and 65535.</string>
+    <string name="probe_timeout">Connection timed out</string>
+    <string name="probe_dns">Server name not found</string>
+    <string name="probe_refused">Connection refused</string>
+    <string name="probe_tls">Certificate not trusted</string>
+    <string name="probe_http">Server error (HTTP %1$d)</string>
+    <string name="probe_cleartext">Plain HTTP is blocked by this build</string>
+    <string name="probe_unknown">Could not connect to the server</string>
+    <string name="test_connection">Test connection</string>
+    <string name="test_result_success">Connected · %1$s · HTTP %2$d · %3$d ms</string>
+    <string name="test_result_success_no_status">Connected · %1$s · %2$d ms</string>
+    <string name="test_result_failure">Not reachable · %1$s</string>
+    <string name="test_result_valid">%1$s</string>
+    <string name="testing">Testing…</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_server_section">Server</string>
+    <string name="settings_current_connection">Current connection</string>
+    <string name="settings_current_mode">Mode: %1$s</string>
+    <string name="settings_current_unconfigured">No server configured</string>
+    <string name="settings_mode_label">Connection mode</string>
+    <string name="settings_mode_single">Single server</string>
+    <string name="settings_mode_auto">Automatic (local → remote)</string>
+    <string name="settings_mode_local">Local only</string>
+    <string name="settings_mode_remote">Remote only</string>
+    <string name="settings_primary_url">Server URL</string>
+    <string name="settings_local_url">Local server URL</string>
+    <string name="settings_remote_url">Remote server URL</string>
+    <string name="settings_local_helper">For example http://192.168.x.x:8080 (development LAN).</string>
+    <string name="settings_remote_helper">For example https://ai.example.com (must be HTTPS).</string>
+    <string name="settings_mode_help">Automatic mode probes the local server first. If it is unavailable, Expuz AI offers the remote server with an explicit confirmation so a login session is never silently lost.</string>
+    <string name="settings_mode_single_help">Use one server address. Changing to a different origin may require signing in again; the app asks first.</string>
+    <string name="settings_mode_local_help">Only the local address is used. This is ideal when the phone is always on the same Wi-Fi as the server.</string>
+    <string name="settings_mode_remote_help">Only the remote HTTPS address is used. Recommended when you are away from the local network.</string>
+    <string name="settings_test">Test current setup</string>
+    <string name="settings_save">Save changes</string>
+    <string name="settings_saved">Settings saved</string>
+    <string name="settings_save_failed">Could not save settings</string>
+    <string name="settings_server_changed_title">Switch server?</string>
+    <string name="settings_server_changed_message">The new address uses a different origin. Cookies and local storage are stored per origin, so you may need to sign in again. The current login is not deleted. Continue?</string>
+    <string name="settings_local_required">Add a local server URL for this mode.</string>
+    <string name="settings_remote_required">Add a remote server URL for this mode.</string>
+    <string name="settings_auto_required">Add at least one local or remote server URL.</string>
+    <string name="settings_status_online">Reachable · HTTP %1$d · %2$d ms</string>
+    <string name="settings_status_offline">Not reachable · %1$s</string>
+    <string name="settings_status_untested">Not checked yet</string>
+    <string name="settings_frontend_section">Frontend</string>
+    <string name="settings_frontend_note">The chat UI is served by your server. Update Open WebUI there, then reload here — no APK rebuild needed.</string>
+    <string name="settings_reload">Reload frontend</string>
+    <string name="settings_reload_desc">Reloads the page from the server. Cached files are used when the server allows it.</string>
+    <string name="settings_clear_cache">Clear HTTP cache and reload</string>
+    <string name="settings_clear_cache_desc">Forces CSS, JavaScript and images to download again. Cookies and local storage stay intact, so you remain signed in.</string>
+    <string name="settings_clear_cache_title">Clear HTTP cache?</string>
+    <string name="settings_clear_cache_message">Cached frontend files will be downloaded again. Your login session and app settings are kept.</string>
+    <string name="settings_clear_cache_confirm">Clear and reload</string>
+    <string name="settings_about_section">About</string>
+    <string name="settings_version">Version %1$s (%2$d)</string>
+    <string name="settings_package_label">Package</string>
+    <string name="settings_package_value">com.expuz.ai</string>
+    <string name="settings_security_note">Remote servers must use HTTPS. Certificate errors are never ignored. No API keys or backend credentials are stored in this app.</string>
+    <string name="settings_test_local">Local: %1$s</string>
+    <string name="settings_test_remote">Remote: %1$s</string>
+    <string name="settings_test_both">%1$s\n%2$s</string>
+    <string name="settings_url_preview">Active URL: %1$s</string>
+    <string name="settings_auto_active_hint">The active URL is chosen from these addresses.</string>
+</resources>

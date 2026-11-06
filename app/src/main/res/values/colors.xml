@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="expuz_black">#000000</color>
+    <color name="expuz_surface">#0A0A0C</color>
+    <color name="expuz_surface_variant">#141418</color>
+    <color name="expuz_surface_high">#1C1C22</color>
+    <color name="expuz_outline">#2C2C35</color>
+
+    <color name="expuz_text">#F4F4F7</color>
+    <color name="expuz_text_muted">#9B9BA7</color>
+
+    <!-- Single accent source. Change these two colors to rebrand the native shell. -->
+    <color name="expuz_accent">#8B7CFF</color>
+    <color name="expuz_accent_soft">#211C3A</color>
+    <color name="expuz_on_accent">#08050F</color>
+
+    <color name="expuz_success">#4ADE80</color>
+    <color name="expuz_success_soft">#10251A</color>
+    <color name="expuz_error">#FF7A7A</color>
+    <color name="expuz_error_soft">#2A1214</color>
+    <color name="expuz_warning">#FBBF24</color>
+    <color name="expuz_scrim">#CC000000</color>
+
+    <!-- Glassmorphism toolbar -->
+    <color name="expuz_glass_base">#0DFFFFFF</color>
+    <color name="expuz_glass_top">#D912131A</color>
+    <color name="expuz_glass_bottom">#B80D0E13</color>
+    <color name="expuz_glass_hairline">#40FFFFFF</color>
+</resources>

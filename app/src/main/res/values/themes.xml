@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Theme.Expuz" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/expuz_accent</item>
+        <item name="colorOnPrimary">@color/expuz_on_accent</item>
+        <item name="colorPrimaryContainer">@color/expuz_accent_soft</item>
+        <item name="colorOnPrimaryContainer">@color/expuz_text</item>
+
+        <item name="colorSecondary">@color/expuz_accent</item>
+        <item name="colorOnSecondary">@color/expuz_on_accent</item>
+        <item name="colorSecondaryContainer">@color/expuz_accent_soft</item>
+        <item name="colorOnSecondaryContainer">@color/expuz_text</item>
+
+        <item name="colorTertiary">@color/expuz_success</item>
+        <item name="colorOnTertiary">@color/expuz_black</item>
+
+        <item name="colorSurface">@color/expuz_surface</item>
+        <item name="colorOnSurface">@color/expuz_text</item>
+        <item name="colorSurfaceVariant">@color/expuz_surface_variant</item>
+        <item name="colorOnSurfaceVariant">@color/expuz_text_muted</item>
+        <item name="colorSurfaceDim">@color/expuz_black</item>
+        <item name="colorSurfaceBright">@color/expuz_surface_high</item>
+        <item name="colorSurfaceContainer">@color/expuz_surface</item>
+        <item name="colorSurfaceContainerLow">@color/expuz_surface</item>
+        <item name="colorSurfaceContainerHigh">@color/expuz_surface_variant</item>
+        <item name="colorSurfaceContainerHighest">@color/expuz_surface_high</item>
+        <item name="colorOutline">@color/expuz_outline</item>
+        <item name="colorOutlineVariant">@color/expuz_outline</item>
+
+        <item name="colorError">@color/expuz_error</item>
+        <item name="colorOnError">@color/expuz_black</item>
+        <item name="colorErrorContainer">@color/expuz_error_soft</item>
+        <item name="colorOnErrorContainer">@color/expuz_error</item>
+
+        <item name="android:colorBackground">@color/expuz_black</item>
+        <item name="android:windowBackground">@color/expuz_black</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+        <item name="android:windowActionModeOverlay">true</item>
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.Expuz.Dialog</item>
+    </style>
+
+    <style name="Theme.Expuz.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/expuz_black</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash_logo</item>
+        <item name="windowSplashScreenIconBackgroundColor">@color/expuz_black</item>
+        <item name="postSplashScreenTheme">@style/Theme.Expuz</item>
+    </style>
+
+    <style name="Theme.Expuz.SettingsPanel" parent="Theme.Expuz">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowAnimationStyle">@style/SettingsPanelAnimation</item>
+    </style>
+
+    <style name="SettingsPanelAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/settings_panel_enter</item>
+        <item name="android:activityOpenExitAnimation">@anim/settings_panel_underlying_exit</item>
+        <item name="android:activityCloseEnterAnimation">@anim/settings_panel_underlying_enter</item>
+        <item name="android:activityCloseExitAnimation">@anim/settings_panel_exit</item>
+    </style>
+
+    <style name="ThemeOverlay.Expuz.Dialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="colorSurface">@color/expuz_surface_variant</item>
+        <item name="colorOnSurface">@color/expuz_text</item>
+        <item name="colorPrimary">@color/expuz_accent</item>
+    </style>
+
+    <style name="TextAppearance.Expuz.Overline" parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:letterSpacing">0.18</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/expuz_accent</item>
+    </style>
+
+    <style name="TextAppearance.Expuz.Section" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:textColor">@color/expuz_text</item>
+    </style>
+
+    <style name="TextAppearance.Expuz.BodyMuted" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textColor">@color/expuz_text_muted</item>
+        <item name="android:lineSpacingExtra">3dp</item>
+    </style>
+
+    <style name="Widget.Expuz.Card" parent="Widget.Material3.CardView.Filled">
+        <item name="cardBackgroundColor">@color/expuz_surface</item>
+        <item name="cardCornerRadius">24dp</item>
+        <item name="cardElevation">0dp</item>
+        <item name="strokeColor">@color/expuz_outline</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+
+    <style name="Widget.Expuz.Button" parent="Widget.Material3.Button">
+        <item name="cornerRadius">16dp</item>
+        <item name="android:minHeight">52dp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="Widget.Expuz.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="cornerRadius">16dp</item>
+        <item name="android:minHeight">52dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="strokeColor">@color/expuz_outline</item>
+    </style>
+
+    <style name="Widget.Expuz.Button.Text" parent="Widget.Material3.Button.TextButton">
+        <item name="cornerRadius">16dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="Widget.Expuz.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="android:background">@color/expuz_black</item>
+        <item name="titleTextColor">@color/expuz_text</item>
+        <item name="subtitleTextColor">@color/expuz_text_muted</item>
+        <item name="navigationIconTint">@color/expuz_text</item>
+    </style>
+
+    <style name="Widget.Expuz.TextInput" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/expuz_accent</item>
+        <item name="hintTextColor">@color/expuz_text_muted</item>
+        <item name="android:textColorHint">@color/expuz_text_muted</item>
+        <item name="boxBackgroundColor">@color/expuz_surface_variant</item>
+        <item name="boxCornerRadiusTopStart">16dp</item>
+        <item name="boxCornerRadiusTopEnd">16dp</item>
+        <item name="boxCornerRadiusBottomStart">16dp</item>
+        <item name="boxCornerRadiusBottomEnd">16dp</item>
+    </style>
+</resources>

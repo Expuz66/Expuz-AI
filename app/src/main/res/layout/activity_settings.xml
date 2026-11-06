@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/settingsRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:clickable="true"
+    android:focusable="true">
+
+    <LinearLayout
+        android:id="@+id/settingsPanel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/expuz_black"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/settingsToolbar"
+        style="@style/Widget.Expuz.Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:navigationContentDescription="@string/back"
+        app:navigationIcon="@drawable/ic_arrow_back"
+        app:title="@string/settings_title"
+        app:titleTextAppearance="@style/TextAppearance.Material3.TitleLarge" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/settingsScroll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="32dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/settings_server_section"
+                android:textAppearance="@style/TextAppearance.Expuz.Overline" />
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.Expuz.Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="18dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/currentKind"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_pill"
+                            android:paddingHorizontal="12dp"
+                            android:paddingVertical="5dp"
+                            android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
+                            android:textColor="@color/expuz_accent"
+                            tools:text="LOCAL" />
+
+                        <TextView
+                            android:id="@+id/currentMode"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                            android:textColor="@color/expuz_text_muted"
+                            tools:text="Mode: Single server" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:text="@string/settings_current_connection"
+                        android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
+                        android:textColor="@color/expuz_text_muted" />
+
+                    <TextView
+                        android:id="@+id/currentUrl"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="monospace"
+                        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                        android:textColor="@color/expuz_text"
+                        android:textIsSelectable="true"
+                        tools:text="http://192.168.1.10:8080/" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.Expuz.Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="18dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/modeLayout"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/settings_mode_label"
+                        app:boxBackgroundColor="@color/expuz_surface_variant"
+                        app:boxCornerRadiusBottomEnd="16dp"
+                        app:boxCornerRadiusBottomStart="16dp"
+                        app:boxCornerRadiusTopEnd="16dp"
+                        app:boxCornerRadiusTopStart="16dp"
+                        app:startIconDrawable="@drawable/ic_server"
+                        app:startIconTint="@color/expuz_text_muted">
+
+                        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                            android:id="@+id/modeDropdown"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="none"
+                            android:textColor="@color/expuz_text" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/primaryLayout"
+                        style="@style/Widget.Expuz.TextInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:hint="@string/settings_primary_url"
+                        app:endIconMode="clear_text"
+                        app:startIconDrawable="@drawable/ic_link"
+                        app:startIconTint="@color/expuz_text_muted">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/primaryInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:imeOptions="actionNext"
+                            android:importantForAutofill="no"
+                            android:inputType="textUri"
+                            android:maxLines="1"
+                            android:textColor="@color/expuz_text" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/localLayout"
+                        style="@style/Widget.Expuz.TextInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:hint="@string/settings_local_url"
+                        android:visibility="gone"
+                        app:endIconMode="clear_text"
+                        app:helperText="@string/settings_local_helper"
+                        app:startIconDrawable="@drawable/ic_wifi"
+                        app:startIconTint="@color/expuz_text_muted">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/localInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:imeOptions="actionNext"
+                            android:importantForAutofill="no"
+                            android:inputType="textUri"
+                            android:maxLines="1"
+                            android:textColor="@color/expuz_text" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/remoteLayout"
+                        style="@style/Widget.Expuz.TextInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:hint="@string/settings_remote_url"
+                        android:visibility="gone"
+                        app:endIconMode="clear_text"
+                        app:helperText="@string/settings_remote_helper"
+                        app:startIconDrawable="@drawable/ic_shield"
+                        app:startIconTint="@color/expuz_text_muted">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/remoteInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:imeOptions="actionDone"
+                            android:importantForAutofill="no"
+                            android:inputType="textUri"
+                            android:maxLines="1"
+                            android:textColor="@color/expuz_text" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/modeHelp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:lineSpacingExtra="2dp"
+                        android:text="@string/settings_mode_help"
+                        android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                        android:textColor="@color/expuz_text_muted" />
+
+                    <LinearLayout
+                        android:id="@+id/testResultCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:background="@drawable/bg_result"
+                        android:gravity="top"
+                        android:orientation="horizontal"
+                        android:padding="14dp"
+                        android:visibility="gone"
+                        tools:visibility="visible">
+
+                        <ImageView
+                            android:id="@+id/testResultIcon"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_check_circle"
+                            app:tint="@color/expuz_success" />
+
+                        <TextView
+                            android:id="@+id/testResultText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:lineSpacingExtra="2dp"
+                            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                            android:textColor="@color/expuz_text"
+                            tools:text="Local: Reachable · HTTP 200 · 24 ms&#10;Remote: Certificate not trusted" />
+                    </LinearLayout>
+
+                    <com.google.android.material.progressindicator.LinearProgressIndicator
+                        android:id="@+id/settingsProgress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:indeterminate="true"
+                        android:visibility="gone"
+                        app:indicatorColor="@color/expuz_accent"
+                        app:trackColor="@color/expuz_surface_variant"
+                        app:trackThickness="2dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/testButton"
+                        style="@style/Widget.Expuz.Button.Outlined"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="18dp"
+                        android:text="@string/settings_test"
+                        app:icon="@drawable/ic_wifi"
+                        app:iconGravity="textStart" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/saveButton"
+                        style="@style/Widget.Expuz.Button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/settings_save"
+                        app:icon="@drawable/ic_check"
+                        app:iconGravity="textStart" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/settings_frontend_section"
+                android:textAppearance="@style/TextAppearance.Expuz.Overline" />
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.Expuz.Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="18dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lineSpacingExtra="2dp"
+                        android:text="@string/settings_frontend_note"
+                        android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                        android:textColor="@color/expuz_text_muted" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/reloadButton"
+                        style="@style/Widget.Expuz.Button.Outlined"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/settings_reload"
+                        app:icon="@drawable/ic_refresh"
+                        app:iconGravity="textStart" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/settings_reload_desc"
+                        android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                        android:textColor="@color/expuz_text_muted" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/clearCacheButton"
+                        style="@style/Widget.Expuz.Button.Outlined"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="18dp"
+                        android:text="@string/settings_clear_cache"
+                        app:icon="@drawable/ic_download"
+                        app:iconGravity="textStart" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/settings_clear_cache_desc"
+                        android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                        android:textColor="@color/expuz_text_muted" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/settings_about_section"
+                android:textAppearance="@style/TextAppearance.Expuz.Overline" />
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.Expuz.Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="18dp">
+
+                    <TextView
+                        android:id="@+id/versionText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                        android:textColor="@color/expuz_text"
+                        tools:text="Version 1.0.0-debug (1)" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/settings_package_label"
+                        android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                        android:textColor="@color/expuz_text_muted" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="monospace"
+                        android:text="@string/settings_package_value"
+                        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                        android:textColor="@color/expuz_text"
+                        android:textIsSelectable="true" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:gravity="top"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_shield"
+                            app:tint="@color/expuz_text_muted" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:lineSpacingExtra="2dp"
+                            android:text="@string/settings_security_note"
+                            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                            android:textColor="@color/expuz_text_muted" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>
+</FrameLayout>

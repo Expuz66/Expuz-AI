@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/onboardingRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/expuz_black">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/onboardingScroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="24dp"
+            android:paddingTop="40dp"
+            android:paddingBottom="32dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:contentDescription="@string/expuz_logo"
+                    android:src="@drawable/ic_splash_logo" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/app_name"
+                        android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                        android:textColor="@color/expuz_text" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/app_tagline"
+                        android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                        android:textColor="@color/expuz_text_muted" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:text="@string/onboarding_eyebrow"
+                android:textAppearance="@style/TextAppearance.Expuz.Overline" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/onboarding_title"
+                android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
+                android:textColor="@color/expuz_text" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:lineSpacingExtra="3dp"
+                android:text="@string/onboarding_subtitle"
+                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                android:textColor="@color/expuz_text_muted" />
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.Expuz.Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/onboarding_card_title"
+                        android:textAppearance="@style/TextAppearance.Expuz.Section" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/serverUrlLayout"
+                        style="@style/Widget.Expuz.TextInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:hint="@string/server_url"
+                        app:endIconMode="clear_text"
+                        app:helperText="@string/server_url_helper"
+                        app:startIconDrawable="@drawable/ic_link"
+                        app:startIconTint="@color/expuz_text_muted">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/serverUrlInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:imeOptions="actionGo"
+                            android:importantForAutofill="no"
+                            android:inputType="textUri"
+                            android:maxLines="1"
+                            android:textColor="@color/expuz_text"
+                            tools:text="http://192.168.1.10:8080" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/onboarding_localhost_note"
+                        android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                        android:textColor="@color/expuz_text_muted" />
+
+                    <LinearLayout
+                        android:id="@+id/testResultCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:background="@drawable/bg_result"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="14dp"
+                        android:visibility="gone"
+                        tools:visibility="visible">
+
+                        <ImageView
+                            android:id="@+id/testResultIcon"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_check_circle"
+                            app:tint="@color/expuz_success" />
+
+                        <TextView
+                            android:id="@+id/testResultText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:lineSpacingExtra="2dp"
+                            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                            android:textColor="@color/expuz_text"
+                            tools:text="Connected · LOCAL · HTTP 200 · 34 ms" />
+                    </LinearLayout>
+
+                    <com.google.android.material.progressindicator.LinearProgressIndicator
+                        android:id="@+id/onboardingProgress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="18dp"
+                        android:indeterminate="true"
+                        android:visibility="gone"
+                        app:indicatorColor="@color/expuz_accent"
+                        app:trackColor="@color/expuz_surface_variant"
+                        app:trackThickness="2dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/testButton"
+                        style="@style/Widget.Expuz.Button.Outlined"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="18dp"
+                        android:text="@string/onboarding_test"
+                        app:icon="@drawable/ic_wifi"
+                        app:iconGravity="textStart" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/saveButton"
+                        style="@style/Widget.Expuz.Button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/onboarding_save"
+                        app:icon="@drawable/ic_check"
+                        app:iconGravity="textStart" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/onboarding_advanced_note"
+                android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                android:textColor="@color/expuz_text_muted" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:gravity="top"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_shield"
+                    app:tint="@color/expuz_text_muted" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:lineSpacingExtra="2dp"
+                    android:text="@string/onboarding_privacy"
+                    android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                    android:textColor="@color/expuz_text_muted" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</FrameLayout>
