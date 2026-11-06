@@ -9,8 +9,8 @@
 
     <!--
       The WebView fills the whole window. The page viewport is inset in code so
-      content starts below the translucent toolbar and ends above the
-      navigation bar / keyboard. The toolbar itself overlays the WebView.
+      content starts below the status bar and ends above the navigation bar /
+      keyboard. The toolbar itself remains a floating overlay over the WebView.
     -->
     <FrameLayout
         android:id="@+id/webContainer"

@@ -117,7 +117,10 @@ class WebViewManager(
                 ViewGroup.LayoutParams.MATCH_PARENT,
             )
             setBackgroundColor(Color.BLACK)
-            setPadding(insetLeft, insetTop, insetRight, insetBottom)
+            // Insets belong to the native container, not WebView padding. On
+            // newer WebView builds padding can leave the HTML accessibility
+            // viewport at (0, 0), allowing page controls into the status bar.
+            setPadding(0, 0, 0, 0)
             configureSettings(settings)
             webViewClient = ExpuzWebViewClient()
             webChromeClient = ExpuzChromeClient()
@@ -125,6 +128,7 @@ class WebViewManager(
             addJavascriptInterface(ScrollBridge(), "ExpuzScroll")
         }
 
+        container.setPadding(insetLeft, insetTop, insetRight, insetBottom)
         CookieManager.getInstance().apply {
             setAcceptCookie(true)
             setAcceptThirdPartyCookies(view, false)
@@ -146,7 +150,8 @@ class WebViewManager(
         insetTop = top
         insetRight = right
         insetBottom = bottom
-        webView?.setPadding(left, top, right, bottom)
+        container.setPadding(left, top, right, bottom)
+        webView?.setPadding(0, 0, 0, 0)
     }
 
     private fun configureSettings(settings: WebSettings) {

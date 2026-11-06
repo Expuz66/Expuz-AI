@@ -27,6 +27,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowCompat
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
 import androidx.lifecycle.Lifecycle
@@ -87,6 +88,10 @@ class MainActivity : AppCompatActivity() {
     private var insetBottom = 0
     private var insetLeft = 0
     private var insetRight = 0
+    private var loadingBaseTop = 0
+    private var loadingBaseBottom = 0
+    private var errorBaseTop = 0
+    private var errorBaseBottom = 0
     // Glass blur capture state (API 31+). The bitmap is a blurred snapshot of
     // the strip immediately below the bar, used as a frosted backdrop.
     private val glassHandler = Handler(Looper.getMainLooper())
@@ -130,10 +135,9 @@ class MainActivity : AppCompatActivity() {
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
 
+        configureWindow()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        configureWindow()
         val container = (application as ExpuzApp).container
         serverManager = container.serverManager
         urlPolicy = container.urlPolicy
@@ -167,6 +171,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun configureWindow() {
+        // Use one explicit inset model on every API level. Android 15+ enforces
+        // edge-to-edge for targetSdk 35+, while older releases otherwise use a
+        // different default fitting policy.
+        WindowCompat.setDecorFitsSystemWindows(window, false)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             window.attributes = window.attributes.apply {
                 layoutInDisplayCutoutMode =
@@ -214,6 +222,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun applyInsets() {
+        loadingBaseTop = binding.loadingOverlay.paddingTop
+        loadingBaseBottom = binding.loadingOverlay.paddingBottom
+        errorBaseTop = binding.errorOverlay.paddingTop
+        errorBaseBottom = binding.errorOverlay.paddingBottom
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, windowInsets ->
             val bars = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
             val cutout = windowInsets.getInsets(WindowInsetsCompat.Type.displayCutout())
@@ -232,21 +244,27 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * Insets the page viewport instead of the WebView view: the WebView still
-     * fills the window, its content starts below the glass bar and ends above
-     * the navigation bar or keyboard. Applied as WebView padding so Open
-     * WebUI's own scrolling containers are untouched.
+     * Insets the page viewport instead of changing the WebView's bounds: the
+     * WebView still fills the window, its content starts below the status bar
+     * and ends above the navigation bar or keyboard. Applied to the native
+     * WebView container so the HTML viewport itself starts at the safe origin.
      */
     private fun applyContentInsets() {
-        // The capsule is a floating overlay; do not reserve a full-width
-        // header in the frontend viewport.
-        val top = 0
+        // Reserve only the status-bar inset, not the toolbar height. The
+        // toolbar remains a floating overlay over the page viewport.
+        val top = insetTop
         val bottom = insetBottom
         if (::webViewManager.isInitialized) {
             webViewManager.setContentInsets(insetLeft, top, insetRight, bottom)
         }
-        binding.loadingOverlay.updatePadding(bottom = bottom)
-        binding.errorOverlay.updatePadding(bottom = bottom)
+        binding.loadingOverlay.updatePadding(
+            top = loadingBaseTop + insetTop,
+            bottom = loadingBaseBottom + bottom,
+        )
+        binding.errorOverlay.updatePadding(
+            top = errorBaseTop + insetTop,
+            bottom = errorBaseBottom + bottom,
+        )
     }
 
     private fun updateFloatingToolbarPosition() {
@@ -332,7 +350,7 @@ class MainActivity : AppCompatActivity() {
         val location = IntArray(2)
         binding.root.getLocationInWindow(location)
         val width = binding.webContainer.width
-        val stripTop = barHeight
+        val stripTop = binding.toolbarGlass.top + barHeight
         val stripHeight = minOf(barHeight, location[1] + binding.webContainer.height - stripTop)
         if (stripHeight <= 0 || width <= 0) return
 
@@ -477,6 +495,10 @@ class MainActivity : AppCompatActivity() {
                 }
             },
         )
+        // Insets may have been dispatched while the WebView manager was not
+        // initialized yet. Apply the already-computed values to the newly
+        // created WebView instead of waiting for a second inset dispatch.
+        applyContentInsets()
     }
 
     private fun setupActions() {
