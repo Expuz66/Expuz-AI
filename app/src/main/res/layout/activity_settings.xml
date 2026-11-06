@@ -9,12 +9,22 @@
     android:clickable="true"
     android:focusable="true">
 
+    <View
+        android:id="@+id/settingsScrim"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#85000000"
+        android:clickable="true"
+        android:contentDescription="@string/close" />
+
     <LinearLayout
         android:id="@+id/settingsPanel"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/expuz_black"
+        android:background="@drawable/bg_settings_glass"
         android:clickable="true"
+        android:clipToOutline="true"
+        android:elevation="16dp"
         android:focusable="true"
         android:orientation="vertical">
 
@@ -23,6 +33,7 @@
         style="@style/Widget.Expuz.Toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/transparent"
         app:navigationContentDescription="@string/back"
         app:navigationIcon="@drawable/ic_arrow_back"
         app:title="@string/settings_title"

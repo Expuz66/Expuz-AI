@@ -2,11 +2,13 @@ package com.expuz.ai.ui.settings
 
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
@@ -39,6 +41,7 @@ class SettingsActivity : AppCompatActivity() {
     private var loadedConfig: ServerConfig? = null
     private var mode = ConnectionMode.MANUAL
     private var busy = false
+    private var closing = false
 
     private val modes = listOf(
         ConnectionMode.MANUAL,
@@ -58,7 +61,10 @@ class SettingsActivity : AppCompatActivity() {
             WindowManager.LayoutParams.MATCH_PARENT,
         )
         window.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
-        window.attributes = window.attributes.apply { dimAmount = 0.52f }
+        window.attributes = window.attributes.apply { dimAmount = 0f }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            window.setBackgroundBlurRadius(32)
+        }
 
         binding.settingsPanel.layoutParams = FrameLayout.LayoutParams(
             (resources.displayMetrics.widthPixels * 0.88f).toInt(),
@@ -66,7 +72,10 @@ class SettingsActivity : AppCompatActivity() {
         ).apply {
             gravity = Gravity.END
         }
-        binding.settingsRoot.setOnClickListener { finish() }
+        binding.settingsScrim.setOnClickListener { closePanel() }
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() = closePanel()
+        })
 
         val container = (application as ExpuzApp).container
         serverManager = container.serverManager
@@ -95,7 +104,29 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun setupToolbar() {
-        binding.settingsToolbar.setNavigationOnClickListener { finish() }
+        binding.settingsToolbar.setNavigationOnClickListener { closePanel() }
+    }
+
+    private fun closePanel() {
+        if (closing || isFinishing) return
+        closing = true
+        hideKeyboard()
+        val distance = binding.settingsPanel.width.toFloat()
+        val duration = 300L
+        binding.settingsScrim.animate()
+            .alpha(0f)
+            .setDuration(duration)
+            .setInterpolator(android.view.animation.AccelerateDecelerateInterpolator())
+            .start()
+        binding.settingsPanel.animate()
+            .translationX(distance)
+            .setDuration(duration)
+            .setInterpolator(android.view.animation.AccelerateDecelerateInterpolator())
+            .withEndAction {
+                finish()
+                overridePendingTransition(0, 0)
+            }
+            .start()
     }
 
     private fun setupModeDropdown() {
@@ -344,7 +375,7 @@ class SettingsActivity : AppCompatActivity() {
             when (val result = serverManager.persistConfiguration(config)) {
                 is SaveResult.Success -> {
                     setResult(RESULT_OK)
-                    finish()
+                    closePanel()
                 }
 
                 is SaveResult.Invalid -> {
@@ -403,7 +434,7 @@ class SettingsActivity : AppCompatActivity() {
                     RESULT_OK,
                     Intent().putExtra(EXTRA_FRONTEND_ACTION, ACTION_CLEAR_CACHE),
                 )
-                finish()
+                closePanel()
             }
             .show()
     }
