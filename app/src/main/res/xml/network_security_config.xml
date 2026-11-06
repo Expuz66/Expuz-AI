@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
-    <!-- Release: HTTPS only. Certificate validation is always enforced by WebView/OkHttp. -->
-    <base-config cleartextTrafficPermitted="false">
+    <!--
+        Cleartext is enabled at the platform layer so user-configured private LAN
+        Open WebUI servers can be reached in release builds. UrlPolicy restricts
+        HTTP server URLs to private/LAN hosts; HTTPS certificate validation is
+        still enforced by WebView and OkHttp.
+    -->
+    <base-config cleartextTrafficPermitted="true">
         <trust-anchors>
             <certificates src="system" />
         </trust-anchors>

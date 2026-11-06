@@ -6,7 +6,8 @@
       Debug builds allow cleartext transport so an explicit LAN development
       server (http://192.168.x.x:8080) can be reached. The app still enforces
       at runtime that cleartext is only used for private/LAN hostnames.
-      Release builds keep android:usesCleartextTraffic="false".
+      Release builds also allow the platform transport; UrlPolicy still limits
+      HTTP server URLs to private/LAN hosts.
     -->
     <application
         android:networkSecurityConfig="@xml/network_security_config"

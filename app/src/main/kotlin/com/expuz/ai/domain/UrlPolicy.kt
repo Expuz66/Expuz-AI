@@ -31,7 +31,9 @@ data class NormalizedServerUrl(
 /**
  * Central URL policy. It is deliberately independent from Android so it can be
  * unit-tested. Cleartext HTTP is only valid for private/LAN hosts, and only in
- * builds that opt into cleartext (debug builds for development).
+ * builds that opt into cleartext. The application opts in for both variants so
+ * release builds can connect to private-LAN Open WebUI servers; public HTTP is
+ * still rejected by the policy.
  */
 class UrlPolicy(private val allowCleartext: Boolean) {
 

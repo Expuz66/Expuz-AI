@@ -54,7 +54,7 @@
     <string name="error_blocked_title">Navigation blocked</string>
     <string name="error_blocked_message">Expuz AI only loads pages from your configured server. Use the button below to review the server address.</string>
     <string name="error_cleartext_title">Insecure connection blocked</string>
-    <string name="error_cleartext_message">Use HTTPS for remote servers. Plain HTTP is only available for private LAN addresses in development builds.</string>
+    <string name="error_cleartext_message">Use HTTPS for remote servers. Plain HTTP is supported only for private LAN addresses. HTTP traffic is not encrypted, so HTTPS is recommended on untrusted networks.</string>
     <string name="error_unknown_title">Could not load Expuz AI</string>
     <string name="error_unknown_message">Something went wrong while loading the server. Check your connection and try again.</string>
     <string name="error_footer">Expuz AI never bypasses TLS certificate errors or loads unapproved external pages inside the app.</string>
@@ -101,7 +101,7 @@
     <string name="url_error_credentials">Do not include a username or password in the URL.</string>
     <string name="url_error_query">Remove the query string and fragment from the server URL.</string>
     <string name="url_error_remote_http">Use HTTPS for remote servers. Plain HTTP is only allowed on a private local network.</string>
-    <string name="url_error_http_disabled">This build does not allow plain HTTP. Use HTTPS, or install the debug build for LAN development.</string>
+    <string name="url_error_http_disabled">Plain HTTP is only allowed for private LAN addresses. Use HTTPS for remote servers.</string>
     <string name="url_error_host">Enter a valid host name or IP address.</string>
     <string name="url_error_port">Enter a valid port between 1 and 65535.</string>
     <string name="probe_timeout">Connection timed out</string>
@@ -132,7 +132,7 @@
     <string name="settings_primary_url">Server URL</string>
     <string name="settings_local_url">Local server URL</string>
     <string name="settings_remote_url">Remote server URL</string>
-    <string name="settings_local_helper">For example http://192.168.x.x:8080 (development LAN).</string>
+    <string name="settings_local_helper">For example http://192.168.x.x:8080. LAN HTTP is unencrypted; use HTTPS on untrusted networks.</string>
     <string name="settings_remote_helper">For example https://ai.example.com (must be HTTPS).</string>
     <string name="settings_mode_help">Automatic mode probes the local server first. If it is unavailable, Expuz AI offers the remote server with an explicit confirmation so a login session is never silently lost.</string>
     <string name="settings_mode_single_help">Use one server address. Changing to a different origin may require signing in again; the app asks first.</string>

@@ -14,7 +14,9 @@ import kotlinx.coroutines.SupervisorJob
 
 class AppContainer(context: Context) {
 
-    val urlPolicy: UrlPolicy = UrlPolicy(BuildConfig.DEBUG)
+    // The platform must permit cleartext for private-LAN Open WebUI servers in
+    // release builds too. UrlPolicy still rejects HTTP for non-LAN hosts.
+    val urlPolicy: UrlPolicy = UrlPolicy(allowCleartext = true)
 
     val serverStore: ServerStore = DataStoreServerStore(context.applicationContext)
 

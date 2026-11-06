@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
     <!--
-      Development-only override. Cleartext is permitted by the platform, but
-      UrlPolicy still rejects HTTP for anything that is not a private LAN host.
+      Cleartext is permitted by the platform, but UrlPolicy rejects HTTP for
+      anything that is not a private LAN host.
     -->
     <base-config cleartextTrafficPermitted="true">
         <trust-anchors>

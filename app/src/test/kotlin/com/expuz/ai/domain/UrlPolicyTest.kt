@@ -8,7 +8,7 @@ import org.junit.Test
 class UrlPolicyTest {
 
     private val debugPolicy = UrlPolicy(allowCleartext = true)
-    private val releasePolicy = UrlPolicy(allowCleartext = false)
+    private val releasePolicy = UrlPolicy(allowCleartext = true)
 
     @Test
     fun httpsRemoteIsValid() {
@@ -21,22 +21,15 @@ class UrlPolicyTest {
     }
 
     @Test
-    fun privateHttpIsAllowedInDebug() {
+    fun privateHttpIsAllowedInDebugAndRelease() {
         val result = debugPolicy.validate("http://192.168.1.20:8080")
         assertTrue(result is UrlValidation.Valid)
         val url = (result as UrlValidation.Valid).url
         assertTrue(url.isLan)
         assertEquals("http://192.168.1.20:8080", url.origin)
-    }
 
-    @Test
-    fun privateHttpIsRejectedInRelease() {
-        val result = releasePolicy.validate("http://192.168.1.20:8080")
-        assertTrue(result is UrlValidation.Invalid)
-        assertEquals(
-            UrlProblem.CLEARTEXT_DISABLED,
-            (result as UrlValidation.Invalid).problem,
-        )
+        val releaseResult = releasePolicy.validate("http://192.168.1.20:8080")
+        assertTrue(releaseResult is UrlValidation.Valid)
     }
 
     @Test
@@ -46,6 +39,13 @@ class UrlPolicyTest {
         assertEquals(
             UrlProblem.INSECURE_REMOTE_HTTP,
             (result as UrlValidation.Invalid).problem,
+        )
+
+        val releaseResult = releasePolicy.validate("http://example.com")
+        assertTrue(releaseResult is UrlValidation.Invalid)
+        assertEquals(
+            UrlProblem.INSECURE_REMOTE_HTTP,
+            (releaseResult as UrlValidation.Invalid).problem,
         )
     }
 

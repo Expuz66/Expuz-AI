@@ -91,9 +91,10 @@ Notes:
   allow the port through the PC firewall. Example:
   `uvicorn open_webui.main:app --host 0.0.0.0 --port 8080`
   (use whatever launch command your Open WebUI version documents).
-- **Plain HTTP is only accepted for private/LAN addresses** and only in debug
-  builds. Any remote address must be HTTPS; certificate errors are never
-  ignored or bypassed.
+- **Plain HTTP is accepted for private/LAN addresses in release and debug
+  builds** so self-hosted Open WebUI servers can run on a local network. HTTP
+  traffic is unencrypted; use HTTPS on untrusted networks. Any remote address
+  must be HTTPS; certificate errors are never ignored or bypassed.
 - A different port is a different origin.
 - If Open WebUI is behind a reverse proxy, use the public HTTPS URL.
 
@@ -141,6 +142,8 @@ toolbar settings button.
   is supplied.
 - Android `FileProvider` and system package-installer integration with package,
   version, and signing-certificate compatibility checks.
+- Release-build support for user-configured private-LAN HTTP servers, including
+  RFC1918 IPv4 ranges, while remote HTTP remains rejected.
 
 ## Screenshots
 
@@ -294,8 +297,8 @@ This project is distributed under the MIT License. See [`LICENSE`](LICENSE).
   return a session to the WebView; username/password login works inside the
   app.
 - The launch icon, splash logo and accent colour are placeholders.
-- HTTP is a debug-build feature for LAN development only. A release build
-  accepts HTTPS only.
+- HTTP is supported for private/LAN server addresses in both build variants,
+  but traffic is unencrypted. Remote servers must use HTTPS.
 
 ---
 
