@@ -3,6 +3,10 @@
 build/
 !gradle/wrapper/gradle-wrapper.jar
 local.properties
+keystore.properties
+*.jks
+*.keystore
+*.p12
 
 # Android Studio / IntelliJ
 .idea/

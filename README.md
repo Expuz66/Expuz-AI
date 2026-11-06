@@ -5,15 +5,38 @@ hardened `WebView`. The chat UI is **not bundled** in the APK: it is downloaded
 from the server you configure, so frontend updates on the server show up after a
 reload without rebuilding the app.
 
+## Project Overview
+
+Expuz AI Android is a WebView-based mobile interface for an existing self-hosted
+Open WebUI server. The APK provides the native shell, secure navigation, settings,
+connection handling, and update delivery; the Open WebUI frontend remains hosted
+by the configured server.
+
 - Package: `com.expuz.ai`
 - Kotlin + AndroidX + Material 3, XML layouts / ViewBinding (no Compose)
 - Min SDK 26, target/compile SDK 36
 - No API keys, tokens or backend credentials are compiled into the APK
 - No changes are made to the Open WebUI server or its configuration
 
+## Release Information
+
+- Version: **1.0.0**
+- Application ID: `com.expuz.ai`
+- Version code: `1`
+- Minimum Android SDK: `26`
+- Target Android SDK: `36`
+- Compile SDK: `36`
+
 ---
 
-## Build and install
+## Installation
+
+Official APK distributions are provided through the [GitHub Releases page](https://github.com/Expuz66/Expuz-AI/releases).
+When v1.0.0 is published there, download `Expuz-AI-v1.0.0.apk`, enable
+installation from this source if Android requests it, and confirm installation
+in the Android system package installer.
+
+## Building from Source
 
 Requirements: JDK 17+ (built with JDK 21), Android SDK with API 36 platform and
 build-tools, and an Android device or emulator running API 26+.
@@ -22,14 +45,21 @@ build-tools, and an Android device or emulator running API 26+.
 # Debug build (cleartext HTTP allowed only for private LAN hosts)
 .\gradlew.bat :app:assembleDebug
 
+# Production release build
+.\gradlew.bat :app:assembleRelease
+
 # Unit tests
 .\gradlew.bat :app:testDebugUnitTest
 ```
 
-APK output:
+The release build uses the existing release keystore through an untracked
+`keystore.properties` file. Do not commit passwords or keystores. Configure it
+locally with `storeFile`, `storePassword`, `keyAlias`, and `keyPassword` values.
+
+Release APK output:
 
 ```
-app/build/outputs/apk/debug/app-debug.apk
+app/build/outputs/apk/release/app-release.apk
 ```
 
 Install on a connected device/emulator:
@@ -104,6 +134,17 @@ toolbar settings button.
 - File uploads through the Storage Access Framework; downloads through
   `DownloadManager` into the app-specific Downloads folder.
 - AMOLED-friendly black theme with a replaceable accent colour.
+- Automatic GitHub Releases update checking at application startup.
+- Manual update checking from Settings with release status and timestamps.
+- Glass-styled update notification dialog showing release changelogs.
+- HTTPS APK download with progress and SHA-256 verification when a release digest
+  is supplied.
+- Android `FileProvider` and system package-installer integration with package,
+  version, and signing-certificate compatibility checks.
+
+## Screenshots
+
+No screenshots are currently stored in this repository.
 
 ---
 
@@ -133,6 +174,11 @@ app/src/main/kotlin/com/expuz/ai/
     settings/SettingsActivity.kt
   util/
     NetworkMonitor.kt      Default-network availability for the offline banner
+  update/
+    UpdateManager.kt        GitHub release lookup and semantic-version comparison
+    ApkDownloader.kt        APK download, progress, and digest verification
+    ApkInstaller.kt         APK validation and Android package installation
+    UpdateDialog.kt         Release changelog and update actions
 ```
 
 Key configuration locations:
@@ -160,6 +206,10 @@ there is no JavaScript bridge.
 - `:app:testDebugUnitTest` – **31 tests, 0 failures**
   (`UrlPolicyTest` 16, `ServerManagerTest` 10, `ServerProbeTest` 5).
 - `:app:assembleDebug` and `:app:lintDebug` completed successfully.
+- `:app:assembleRelease` completed successfully with the existing release key.
+- The release APK was verified with Android SDK Build Tools `apksigner` using APK
+  Signature Scheme v2. The application ID, version name, and version code were
+  verified as `com.expuz.ai`, `1.0.0`, and `1`.
 - Installed with `adb install -r` on an authorized Pixel 4 XL (Android 13 / API
   33) using the existing app data and active Open WebUI session. Verified the
   glass toolbar/status/buttons, Settings navigation, refresh button, and
@@ -188,6 +238,45 @@ there is no JavaScript bridge.
 - `probeStillWorksAfterServerClosesIdleConnection` reproduces and prevents an
   intermittent onboarding "could not reach" failure caused by reusing an idle
   keep-alive socket; the probe now retries on a fresh connection.
+
+## APK Signature Verification
+
+Official release APKs are signed with the project's existing release keystore.
+Future updates must use the same signing certificate or Android will reject the
+update over an installed copy. Verify an APK with:
+
+```powershell
+apksigner verify --verbose --print-certs .\Expuz-AI-v1.0.0.apk
+```
+
+The certificate fingerprint and the APK file checksum are different values.
+
+## SHA-256 Verification
+
+From the directory containing the downloaded APK, calculate its checksum with:
+
+```powershell
+Get-FileHash .\Expuz-AI-v1.0.0.apk -Algorithm SHA256
+```
+
+The calculated value must match the published `Expuz-AI-v1.0.0.apk.sha256` file.
+Recalculate the checksum whenever the APK changes; a rebuilt or modified APK has
+a different checksum.
+
+## Automatic Updates
+
+The app queries the official GitHub Releases API when the application process
+starts and does not interrupt WebView initialization when no update is available.
+Users can also run the same check from **Settings**. When a newer stable release
+is found, the dialog displays its release name and changelog. The user explicitly
+starts the HTTPS APK download, and Android displays the final package-installer
+confirmation. Installation requires a compatible package name, newer version,
+and the same signing certificate. Draft and prerelease releases are not treated
+as stable updates.
+
+## License
+
+This project is distributed under the MIT License. See [`LICENSE`](LICENSE).
 
 ---
 
