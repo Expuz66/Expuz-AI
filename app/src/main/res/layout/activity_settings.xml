@@ -59,6 +59,65 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/settings_update_section"
+                android:textAppearance="@style/TextAppearance.Expuz.Overline" />
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.Expuz.Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="18dp">
+                    <TextView
+                        android:id="@+id/updateInstalled"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                        android:textColor="@color/expuz_text" />
+                    <TextView
+                        android:id="@+id/updateLatest"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                        android:textColor="@color/expuz_text_muted"
+                        android:text="@string/settings_update_never_checked" />
+                    <TextView
+                        android:id="@+id/updateLastChecked"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                        android:textColor="@color/expuz_text_muted"
+                        android:text="@string/settings_update_never_checked" />
+                    <TextView
+                        android:id="@+id/updateStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                        android:textColor="@color/expuz_text_muted" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/updateCheck"
+                        style="@style/Widget.Expuz.Button.Outlined"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:text="@string/settings_update_check"
+                        app:icon="@drawable/ic_refresh"
+                        app:iconGravity="textStart" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
                 android:layout_marginBottom="10dp"
                 android:text="@string/settings_server_section"
                 android:textAppearance="@style/TextAppearance.Expuz.Overline" />

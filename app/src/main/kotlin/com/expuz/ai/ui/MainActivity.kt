@@ -49,6 +49,9 @@ import com.expuz.ai.ui.onboarding.OnboardingActivity
 import com.expuz.ai.ui.settings.SettingsActivity
 import com.expuz.ai.util.NetworkMonitor
 import com.expuz.ai.web.WebViewManager
+import com.expuz.ai.update.UpdateDialog
+import com.expuz.ai.update.UpdateManager
+import com.expuz.ai.update.UpdateResult
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Job
@@ -61,6 +64,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var urlPolicy: UrlPolicy
     private lateinit var webViewManager: WebViewManager
     private lateinit var networkMonitor: NetworkMonitor
+    private lateinit var updateManager: UpdateManager
 
     private var currentConfig = ServerConfig()
     private var configurationLoaded = false
@@ -75,6 +79,7 @@ class MainActivity : AppCompatActivity() {
     private var fallbackJob: Job? = null
     private var lastBlockedMessageAt = 0L
     private var toolbarHidden = false
+    private var configurationLoadedForUpdate = false
 
     // Edge-to-edge metrics, in pixels.
     private var topBarHeightPx = 0
@@ -132,6 +137,7 @@ class MainActivity : AppCompatActivity() {
         val container = (application as ExpuzApp).container
         serverManager = container.serverManager
         urlPolicy = container.urlPolicy
+        updateManager = container.updateManager
 
         restoredUrl = savedInstanceState?.getString(KEY_LAST_URL)
         splashScreen.setKeepOnScreenCondition { !configurationLoaded }
@@ -148,6 +154,13 @@ class MainActivity : AppCompatActivity() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 serverManager.config.collect { config ->
                     handleConfiguration(config)
+                }
+            }
+        }
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                updateManager.startupResult.collect {
+                    maybeShowStartupUpdate()
                 }
             }
         }
@@ -497,6 +510,8 @@ class MainActivity : AppCompatActivity() {
     private fun handleConfiguration(config: ServerConfig) {
         val firstLoad = !configurationLoaded
         configurationLoaded = true
+        configurationLoadedForUpdate = true
+        maybeShowStartupUpdate()
         currentConfig = config
 
         if (!config.isConfigured) {
@@ -525,6 +540,12 @@ class MainActivity : AppCompatActivity() {
         } else {
             updateConnectionIndicator()
         }
+    }
+
+    private fun maybeShowStartupUpdate() {
+        if (!configurationLoadedForUpdate) return
+        val available = updateManager.consumeStartupAvailable() ?: return
+        UpdateDialog.show(this, available.release, available.installedVersion)
     }
 
     private fun loadServer(url: String) {

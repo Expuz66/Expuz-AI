@@ -29,6 +29,9 @@ import com.expuz.ai.domain.ServerManager
 import com.expuz.ai.domain.UrlPolicy
 import com.expuz.ai.domain.UrlProblem
 import com.expuz.ai.ui.UiText
+import com.expuz.ai.update.UpdateDialog
+import com.expuz.ai.update.UpdateManager
+import com.expuz.ai.update.UpdateResult
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.launch
 
@@ -37,6 +40,7 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySettingsBinding
     private lateinit var serverManager: ServerManager
     private lateinit var urlPolicy: UrlPolicy
+    private lateinit var updateManager: UpdateManager
 
     private var loadedConfig: ServerConfig? = null
     private var mode = ConnectionMode.MANUAL
@@ -80,12 +84,14 @@ class SettingsActivity : AppCompatActivity() {
         val container = (application as ExpuzApp).container
         serverManager = container.serverManager
         urlPolicy = container.urlPolicy
+        updateManager = container.updateManager
 
         applyInsets()
         setupToolbar()
         setupModeDropdown()
         setupFields()
         setupActions()
+        setupUpdates()
         loadConfiguration()
     }
 
@@ -157,6 +163,48 @@ class SettingsActivity : AppCompatActivity() {
             finish()
         }
         binding.clearCacheButton.setOnClickListener { confirmClearCache() }
+    }
+
+    private fun setupUpdates() {
+        binding.updateInstalled.text = getString(
+            R.string.settings_version,
+            BuildConfig.VERSION_NAME,
+            BuildConfig.VERSION_CODE,
+        )
+        binding.updateCheck.setOnClickListener {
+            if (busy) return@setOnClickListener
+            binding.updateCheck.isEnabled = false
+            binding.updateStatus.text = getString(R.string.status_connecting)
+            lifecycleScope.launch {
+                val checkedAt = java.text.SimpleDateFormat(
+                    "HH:mm:ss",
+                    java.util.Locale.getDefault(),
+                ).format(java.util.Date())
+                binding.updateLastChecked.text = checkedAt
+                when (val result = updateManager.checkLatest(BuildConfig.VERSION_NAME)) {
+                    UpdateResult.UpToDate -> {
+                        binding.updateLatest.text = getString(R.string.settings_update_up_to_date)
+                        binding.updateStatus.text = getString(R.string.settings_update_up_to_date)
+                    }
+                    is UpdateResult.Available -> {
+                        binding.updateLatest.text = getString(
+                            R.string.settings_update_latest,
+                            result.release.tag,
+                        )
+                        binding.updateStatus.text = result.release.name
+                        UpdateDialog.show(this@SettingsActivity, result.release, result.installedVersion)
+                    }
+                    is UpdateResult.Failure -> {
+                        binding.updateLatest.text = getString(R.string.settings_update_unavailable)
+                        binding.updateStatus.text = getString(
+                            R.string.settings_update_check_failed,
+                            result.message,
+                        )
+                    }
+                }
+                binding.updateCheck.isEnabled = true
+            }
+        }
     }
 
     private fun loadConfiguration() {

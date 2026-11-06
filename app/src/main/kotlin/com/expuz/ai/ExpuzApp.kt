@@ -16,5 +16,6 @@ class ExpuzApp : Application() {
             WebView.setWebContentsDebuggingEnabled(true)
         }
         container = AppContainer(this)
+        container.updateManager.checkOnProcessStart()
     }
 }

@@ -7,6 +7,10 @@ import com.expuz.ai.domain.OkHttpServerProbe
 import com.expuz.ai.domain.ServerManager
 import com.expuz.ai.domain.ServerProbe
 import com.expuz.ai.domain.UrlPolicy
+import com.expuz.ai.update.UpdateManager
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 
 class AppContainer(context: Context) {
 
@@ -21,4 +25,7 @@ class AppContainer(context: Context) {
         probe = serverProbe,
         urlPolicy = urlPolicy,
     )
+
+    private val updateScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
+    val updateManager: UpdateManager = UpdateManager(updateScope)
 }

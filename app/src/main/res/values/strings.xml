@@ -164,6 +164,21 @@
     <string name="settings_package_label">Package</string>
     <string name="settings_package_value">com.expuz.ai</string>
     <string name="settings_security_note">Remote servers must use HTTPS. Certificate errors are never ignored. No API keys or backend credentials are stored in this app.</string>
+    <string name="settings_update_section">Update</string>
+    <string name="settings_update_latest">Latest available: %1$s</string>
+    <string name="settings_update_never_checked">Not checked yet</string>
+    <string name="settings_update_check">Check for updates</string>
+    <string name="settings_update_up_to_date">Expuz AI is up to date.</string>
+    <string name="settings_update_unavailable">No stable release information available.</string>
+    <string name="settings_update_check_failed">Update check failed: %1$s</string>
+    <string name="update_available_title">Expuz AI update available</string>
+    <string name="update_versions">Installed: %1$s
+Latest: %2$s</string>
+    <string name="update_later">Later</string>
+    <string name="update_now">Update</string>
+    <string name="update_install_permission">Allow this app to install updates, then return and press Update again.</string>
+    <string name="update_invalid_apk">The downloaded APK is not a compatible Expuz AI update.</string>
+    <string name="update_download_failed">Update download failed: %1$s</string>
     <string name="settings_test_local">Local: %1$s</string>
     <string name="settings_test_remote">Remote: %1$s</string>
     <string name="settings_test_both">%1$s\n%2$s</string>

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
-    <solid android:color="#D90D0E13" />
+    <!-- More transparent panel surface; child cards retain their own contrast. -->
+    <solid android:color="#A60D0E13" />
     <corners
         android:bottomLeftRadius="28dp"
         android:topLeftRadius="28dp" />

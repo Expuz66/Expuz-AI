@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/update_available_title"
+        android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+        android:textColor="@color/expuz_text" />
+
+    <TextView
+        android:id="@+id/updateVersions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+        android:textColor="@color/expuz_text_muted" />
+
+    <TextView
+        android:id="@+id/updateReleaseName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+        android:textColor="@color/expuz_accent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/expuz_surface_variant"
+        android:padding="12dp">
+        <TextView
+            android:id="@+id/updateChangelog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+            android:textColor="@color/expuz_text" />
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/updateProgress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+        android:textColor="@color/expuz_text_muted"
+        android:visibility="gone" />
+
+    <ProgressBar
+        android:id="@+id/updateProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:max="100"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:gravity="end"
+        android:orientation="horizontal">
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/updateLater"
+            style="@style/Widget.Expuz.Button.Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/update_later" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/updateNow"
+            style="@style/Widget.Expuz.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/update_now" />
+    </LinearLayout>
+</LinearLayout>
