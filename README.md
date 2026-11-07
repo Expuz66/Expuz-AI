@@ -20,7 +20,7 @@ by the configured server.
 
 ## Release Information
 
-- Version: **1.0.0**
+- Version: **1.0.1**
 - Application ID: `com.expuz.ai`
 - Version code: `1`
 - Minimum Android SDK: `26`
@@ -32,7 +32,7 @@ by the configured server.
 ## Installation
 
 Official APK distributions are provided through the [GitHub Releases page](https://github.com/Expuz66/Expuz-AI/releases).
-When v1.0.0 is published there, download `Expuz-AI-v1.0.0.apk`, enable
+When v1.0.1 is published there, download `Expuz-AI-v1.0.1.apk`, enable
 installation from this source if Android requests it, and confirm installation
 in the Android system package installer.
 
@@ -212,7 +212,7 @@ there is no JavaScript bridge.
 - `:app:assembleRelease` completed successfully with the existing release key.
 - The release APK was verified with Android SDK Build Tools `apksigner` using APK
   Signature Scheme v2. The application ID, version name, and version code were
-  verified as `com.expuz.ai`, `1.0.0`, and `1`.
+  verified as `com.expuz.ai`, `1.0.1`, and `2`.
 - Installed with `adb install -r` on an authorized Pixel 4 XL (Android 13 / API
   33) using the existing app data and active Open WebUI session. Verified the
   glass toolbar/status/buttons, Settings navigation, refresh button, and
@@ -249,7 +249,7 @@ Future updates must use the same signing certificate or Android will reject the
 update over an installed copy. Verify an APK with:
 
 ```powershell
-apksigner verify --verbose --print-certs .\Expuz-AI-v1.0.0.apk
+apksigner verify --verbose --print-certs .\Expuz-AI-v1.0.1.apk
 ```
 
 The certificate fingerprint and the APK file checksum are different values.
@@ -259,12 +259,31 @@ The certificate fingerprint and the APK file checksum are different values.
 From the directory containing the downloaded APK, calculate its checksum with:
 
 ```powershell
-Get-FileHash .\Expuz-AI-v1.0.0.apk -Algorithm SHA256
+Get-FileHash .\Expuz-AI-v1.0.1.apk -Algorithm SHA256
 ```
 
-The calculated value must match the published `Expuz-AI-v1.0.0.apk.sha256` file.
+The calculated value must match the published `Expuz-AI-v1.0.1.apk.sha256` file.
 Recalculate the checksum whenever the APK changes; a rebuilt or modified APK has
 a different checksum.
+
+## Changelog
+
+See [`CHANGELOG.md`](CHANGELOG.md) for the release history.
+
+### Expuz AI v1.0.1 — Settings UI & Glassmorphism Improvements
+
+Fixed:
+
+- Fixed Settings panel positioning on newer Android versions.
+- Fixed Settings header overlap with the system status bar.
+- Fixed the Settings navigation button being hidden by inset padding.
+- Fixed Settings content clipping near the navigation bar.
+
+Improved:
+
+- Improved Settings panel transparency and background blur.
+- Improved Android 17 visual compatibility.
+- Improved Settings scrolling and navigation while preserving Android 13 support.
 
 ## Automatic Updates
 

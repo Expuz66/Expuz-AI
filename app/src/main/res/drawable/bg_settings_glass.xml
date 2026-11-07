@@ -2,11 +2,11 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
     <!-- More transparent panel surface; child cards retain their own contrast. -->
-    <solid android:color="#A60D0E13" />
+    <solid android:color="#7810141C" />
     <corners
         android:bottomLeftRadius="28dp"
         android:topLeftRadius="28dp" />
     <stroke
         android:width="1dp"
-        android:color="#55FFFFFF" />
+        android:color="#66FFFFFF" />
 </shape>

@@ -12,6 +12,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
@@ -56,6 +57,7 @@ class SettingsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -67,7 +69,9 @@ class SettingsActivity : AppCompatActivity() {
         window.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         window.attributes = window.attributes.apply { dimAmount = 0f }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            window.setBackgroundBlurRadius(32)
+            // The API takes pixels; use a density-scaled radius so the blur is
+            // perceptible and consistent across Pixel densities.
+            window.setBackgroundBlurRadius(dp(28))
         }
 
         binding.settingsPanel.layoutParams = FrameLayout.LayoutParams(
@@ -99,8 +103,13 @@ class SettingsActivity : AppCompatActivity() {
         val baseBottom = binding.settingsScroll.paddingBottom
         ViewCompat.setOnApplyWindowInsetsListener(binding.settingsRoot) { _, insets ->
             val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            val cutout = insets.getInsets(WindowInsetsCompat.Type.displayCutout())
             val ime = insets.getInsets(WindowInsetsCompat.Type.ime())
-            binding.settingsToolbar.updatePadding(top = bars.top)
+            val top = maxOf(bars.top, cutout.top)
+            // Inset the panel's child layout, not the fixed-height toolbar.
+            // This keeps the header and navigation icon visible below the
+            // status bar without applying the inset twice.
+            binding.settingsPanel.updatePadding(top = top)
             binding.settingsScroll.updatePadding(
                 bottom = baseBottom + maxOf(bars.bottom, ime.bottom),
             )
@@ -108,6 +117,9 @@ class SettingsActivity : AppCompatActivity() {
         }
         ViewCompat.requestApplyInsets(binding.settingsRoot)
     }
+
+    private fun dp(value: Int): Int =
+        (value * resources.displayMetrics.density).toInt()
 
     private fun setupToolbar() {
         binding.settingsToolbar.setNavigationOnClickListener { closePanel() }

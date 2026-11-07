@@ -13,7 +13,7 @@
         android:id="@+id/settingsScrim"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#85000000"
+        android:background="#42000000"
         android:clickable="true"
         android:contentDescription="@string/close" />
 
