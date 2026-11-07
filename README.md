@@ -101,13 +101,13 @@ Notes:
 Onboarding flow: enter the address -> **Test connection** -> **Save and
 continue**. If the server is temporarily unreachable, the app offers to save
 anyway so the address is not lost. The URL can be changed later from the
-toolbar settings button.
+toolbar ngs button.
 
 ---
 
 ## Features
 
-- Native splash, onboarding, loading, error and settings screens.
+- Native splash, onboarding, loading, error and ngs screens.
 - Server URL validation (scheme, host, no credentials/query/fragment, LAN vs
   remote rules) with a real HTTP reachability probe before saving.
 - Connection modes:
@@ -116,11 +116,11 @@ toolbar settings button.
     down, offers a *Switch to REMOTE server* button with an explicit
     confirmation dialog. Origins are never switched silently.
   - **Local only**, **Remote only**.
-- Compact floating glass toolbar with refresh and settings icon buttons.
+- Compact floating glass toolbar with refresh and ngs icon buttons.
 - Persistent login: WebView cookies, DOM storage and HTTP cache are kept between
   launches and are flushed on pause. Clearing the HTTP cache keeps cookies and
   local storage, so the session survives.
-- Glass toolbar refresh button, and Settings actions *Reload frontend* and
+- Glass toolbar refresh button, and ngs actions *Reload frontend* and
   *Clear HTTP cache and reload*. Pull-to-refresh is intentionally not used:
   Open WebUI scrolls conversations inside its own `#messages-container`, so a
   native refresh wrapper could steal those gestures.
@@ -265,7 +265,7 @@ a different checksum.
 
 See [`CHANGELOG.md`](CHANGELOG.md) for the release history.
 
-### Expuz AI v1.0.1 — Settings UI & Glassmorphism Improvements
+### Expuz AI v1.0.1 — Settings UI Improvements
 
 Fixed:
 
