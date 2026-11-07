@@ -144,11 +144,6 @@ toolbar settings button.
   version, and signing-certificate compatibility checks.
 - Release-build support for user-configured private-LAN HTTP servers, including
   RFC1918 IPv4 ranges, while remote HTTP remains rejected.
-
-## Screenshots
-
-No screenshots are currently stored in this repository.
-
 ---
 
 ## Architecture
